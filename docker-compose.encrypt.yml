@@ -1,0 +1,18 @@
+version: '2'
+services:
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion:v1.10
+    container_name: letsencrypt
+    depends_on:
+      - nginx
+      - dockergen
+    volumes_from:
+      - nginx
+    volumes:
+      - "./certs:/etc/nginx/certs:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro" 
+    environment:
+      - NGINX_DOCKER_GEN_CONTAINER=dockergen
+    restart: always
+    networks:
+      - proxy
