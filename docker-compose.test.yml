@@ -1,0 +1,9 @@
+version: '2'
+services:  
+  test:
+    image: wordpress
+    networks:
+      - proxy
+    environment:
+      KEYCLOAK_ENABLED: 'true'
+      VIRTUAL_HOST: wordpress.localhost
